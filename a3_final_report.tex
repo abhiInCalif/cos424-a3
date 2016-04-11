@@ -30,6 +30,21 @@ Student Researcher \\
 \end{abstract}
 
 \section{Introduction}
+{\em Bitcoin} is a crypto-currency that uses pseudonymous identities.
+    Our data-set $D$ for this project is a list $L$ of bit coin interactions,
+    where each interaction is a tuple of the form $\iota = (s, r, n)$
+    where $s$ is the sender address, $r$ is the receiver address and $n$ is the number of times $s$
+    sent bitcoins to $r$.
+    We think of the data however as being given to us in a graph $G = (V, E, w)$
+    where $V$ is the set of all addresses,
+    and a edge $e = (s, r)$ exists with weight $w(e) = n$ if $(s, r, n) \in L$.
+    Our objective is to predict whether a new sender and receiver pair $(s', r')$ that
+    is not in the list $L$ will have an interaction in the future.
+    The main difficulty in dealing with the data is that there are more than $N = 400,000$ addresses.
+    Thus, dealing with the full adjacency matrix of size $N^2$ would require space on the
+    order of a terabyte and operations on matrices of this size are incredibly slow.
+    Thus, we try to deal with the data set using sparse matrix representations and mainly
+    use the adjacency list representation of $G$ which is much smaller in size.
 
 \section{Related Work}
 There are many lenses with which we chose to approach the problem. If we treat this problem like a recommendation problem of recommending one user to another, than we base our knowledge off of the field of recommendation engines. Collaborative Filtering is one of the most successful recommendation system techniques (Su 2009). However, traditionally, collaborative filtering has problems dealing with scale and sparsity. The previously cited paper reference hybrid models as a way to combat sparsity and scale. The Netflix recommendation challenge is an area where collaborative filtering has often been used to produce good results. Paterak in his paper, "Improving regularized singular value decomposition for collaborative filtering," cites an SVD to KMeans to KNN collaborative filtering pipeline that works well on the Netflix challenge dataset. In addition to model based techniques for dealing with sparsity for collaborative filtering, a process known as transfer learning can also be used to take a similar dense data set and utilize that to augment the sparse data set (Pan, Xiang, Liu).
